@@ -1,0 +1,51 @@
+Brief
+----------------------------
+
+To find underlying trends in crime data in order to aid justifications of expenditure and better place critical police resources.
+
+Hypothesis
+-----------------------------
+
+The decline in the number of youth clubs in London, due to funding cuts to councils has lead to an increase in crime in those areas.
+
+Background
+--------------------------------
+
+The conservative government have been criticised for cutting funding to local councils used for youth services and this reduction in funding has been linked with the increase in knife crime in the UK. "Causes of appalling increase in knife & gun crime are so complex and so are the solutions, but Tory cuts of almost £1bn from children's services over five years are a good place to start" Helen Hayes, MP for Dulwich & West Norwood (https://www.bbc.co.uk/news/education-43668167).
+
+Engineering (ETL)
+------------------------------
+
+Extract (Data Sources)
+--------------------------------
+
+
+https://data.police.uk/data/archive/ 
+
+Import public crime data from Dec2010 - Aug2018. 
+
+
+FOI request made to Sian Berry (Co-leader of Green Party at time of writing) for the information published regarding London's youth clubs showing the youth clubs that have been closed since 2011.
+
+
+Transform ()
+--------------------------------
+
+Load ()
+---------------------------------
+
+Within the loading process to a new table within SQL server it was imperitive to clean the data provided.
+
+
+
+
+Modelling (inc. enrichment)
+---------------------------------
+
+
+
+
+Analysis
+--------------------------------
+
+
