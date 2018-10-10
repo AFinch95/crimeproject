@@ -1,8 +1,9 @@
 use crimeproject
 go
 
-select top 500
+select
 	 *
+-- Adding columns for Month, Year and Season based on date of crime
 	,datepart(mm, cast([Month]+'-01' as date)) as [month]
 	,datepart(yyyy, cast([Month]+'-01' as date)) as [year]
 	,CASE
@@ -13,13 +14,10 @@ select top 500
 	 END as [season]
 	,[LSOA code]
 	,left([LSOA name], len([LSOA name]) - 5) as [Borough]
---    ,geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')',4326) [location point]
---into [dbo].[cleancrime]
 from [dbo].[crimedataraw]
---where cast([Longitude] as float) not between -0.4945 and 0.2692
---    or cast([Latitude] as float) not between 51.264 and 51.7145
-where 
-	 [LSOA NAME] like('%London%')
+where Location like '%commercial road%' /*
+-- Filtering out the crimes that took place outside of the London Boroughs
+   [LSOA NAME] like('%London%')
 or [LSOA NAME] like('%City of Westminster%')
 or [LSOA NAME] like('%Kensington and Chelsea%')
 or [LSOA NAME] like('%Hammersmith and Fulham%')
@@ -53,6 +51,8 @@ or [LSOA NAME] like('%Barnet%')
 or [LSOA NAME] like('%Harrow%')
 or [LSOA NAME] like('%Hillingdon%')
 
+
+-- Create view for crimeIDs for analysis in Excel
 
 go
 ALTER view vw_dirtycrimeid as 
@@ -92,3 +92,5 @@ WHERE  [LSOA NAME] like('%London%')
 	or [LSOA NAME] like('%Harrow%')
 	or [LSOA NAME] like('%Hillingdon%')
 go
+
+*/
