@@ -13,6 +13,12 @@ Background
 
 The conservative government have been criticised for cutting funding to local councils used for youth services and this reduction in funding has been linked with the increase in knife crime in the UK. "Causes of appalling increase in knife & gun crime are so complex and so are the solutions, but Tory cuts of almost £1bn from children's services over five years are a good place to start" Helen Hayes, MP for Dulwich & West Norwood (https://www.bbc.co.uk/news/education-43668167).
 
+Labour criticising torys for cuts to youth services - https://labour.org.uk/press/labour-announce-bold-vision-statutory-youth-services/
+
+News story about decline in youth services - https://www.bbc.co.uk/news/uk-england-london-43472737
+
+News story about youth service cuts and crime - https://www.bbc.co.uk/news/education-43668167
+
 Engineering (ETL)
 ------------------------------
 
@@ -26,6 +32,10 @@ Import public crime data from Dec2010 - Aug2018.
 
 
 FOI request made to Sian Berry (Co-leader of Green Party at time of writing) for the information published regarding London's youth clubs showing the youth clubs that have been closed since 2011.
+
+LSOA data for London - https://data.london.gov.uk/dataset/lsoa-atlas 
+
+2011 Census data - https://www.ons.gov.uk/census/2011census/2011censusdata/bulkdata/bulkdatadownloads
 
 
 Transform ()
