@@ -90,9 +90,9 @@ create view [vw_latstatanalysis] as
 SELECT * FROM [raw].[latanalysis]
 go
 
--- Create view for Crime IDs of London crimes
+-- Create view for Crime IDs of London crimes **THIS DOESN'T RUN IN EXCEL NOR WILL LOCATION
 go
-alter view [vw_countofcrimeids] as (
+create view [vw_countofcrimeids] as (
 SELECT DISTINCT
 	 [Crime ID]
 	,COUNT(*) over (partition by [Crime ID]) as [CrimeIDCount]
@@ -101,8 +101,49 @@ FROM
 )
 go
 
+-- Create view for LSOA codes of London crimes 
+go
+create view [vw_countofLSOAcodes] as (
+SELECT DISTINCT
+	 [LSOA code]
+	,COUNT(*) over (partition by [LSOA code]) as [LSOAcodeCount]
+FROM
+	[raw].[LondonCrimes]
+)
+go
 
+-- Create view for LSOA names of London crimes 
+go
+create view [vw_countofLSOAnames] as (
+SELECT DISTINCT
+	 [LSOA name]
+	,COUNT(*) over (partition by [LSOA name]) as [LSOAnameCount]
+FROM
+	[raw].[LondonCrimes]
+)
+go
 
+-- Create view for Crime types of London crimes 
+go
+create view [vw_countofcrimetypes] as (
+SELECT DISTINCT
+	 [Crime type]
+	,COUNT(*) over (partition by [Crime type]) as [CrimeTypeCount]
+FROM
+	[raw].[LondonCrimes]
+)
+go
+
+-- Create view for Context of London crimes 
+go
+create view [vw_countofcontext] as (
+SELECT DISTINCT
+	 [Context]
+	,COUNT(*) over (partition by [Context]) as [ContextCount]
+FROM
+	[raw].[LondonCrimes]
+)
+go
 
 
 --SELECT distinct
