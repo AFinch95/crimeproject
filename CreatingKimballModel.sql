@@ -112,3 +112,14 @@ ALTER TABLE [Fact].[facttable]
 ADD CONSTRAINT FK_MonthID FOREIGN KEY (MonthID)
 	REFERENCES [Month].[DimMonth] ([MonthID])
 
+ALTER TABLE [Fact].[facttable]
+ADD CONSTRAINT FK_GeoID FOREIGN KEY (GeoID)
+	REFERENCES [Geography].[DimGeo] ([GeoID])
+
+ALTER TABLE [Fact].[facttable]
+ADD CONSTRAINT FK_CrimeTypeID FOREIGN KEY ([CrimeTypeID])
+	REFERENCES [CrimeType].[DimCrimeType] ([CrimeTypeID])
+
+ALTER TABLE [Fact].[facttable]
+ADD CONSTRAINT FK_OutcomeID FOREIGN KEY ([OutcomeID])
+	REFERENCES [Outcome].[DimOutcome] ([OutcomeID])
