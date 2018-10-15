@@ -5,6 +5,22 @@ go
 create schema [raw]
 ;
 
+create schema [CrimeType]
+;
+
+create schema [Month]
+;
+
+create schema [Fact]
+;
+
+
+create schema [Outcome]
+;
+
+create schema [Geography]
+;
+
 create schema [clean];
 
 --transfer all raw data to raw schema
@@ -34,3 +50,11 @@ alter schema [trash] transfer [dbo].[LondonLSOAcodes]
 alter schema [trash] transfer [raw].[crimedataraw]
 ;
 
+alter schema [trash] transfer [raw].[crimesnolsoa]
+;
+
+alter schema [trash] transfer [raw].[latanalysis]
+;
+
+alter schema [trash] transfer [raw].[longanalysis]
+;
