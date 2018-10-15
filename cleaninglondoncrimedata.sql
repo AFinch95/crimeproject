@@ -1,6 +1,9 @@
 use crimeproject
 go
 
+if OBJECT_ID('[clean].[LondonCrimes]') is not null
+drop table [clean].[LondonCrimes]
+
 -- Cleaning the LondonCrime data
 SELECT
 	   cast(ISNULL(NULLIF([Crime ID], ''), 'Missing') AS char(64)) as [PoliceCrimeID]
@@ -13,3 +16,6 @@ SELECT
 	  ,cast(isnull(nullif([Last outcome category], ''), 'Missing') as varchar(51)) as [Outcome]
 INTO [clean].[LondonCrimes] --8,214,388 rows
 FROM [raw].[LondonCrimes]
+
+ALTER TABLE [clean].[LondonCrimes]
+ADD CrimeID int not null identity 
