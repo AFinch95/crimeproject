@@ -41,6 +41,10 @@ LSOA data for London - https://data.london.gov.uk/dataset/lsoa-atlas
 Transform ()
 --------------------------------
 
+Cut down data from the whole of the UK to those reported crimes that have an LSOA in London. *This did get rid of all crimes without an LSOA though*
+
+List of boroughs not included: Brentwood, Dartford, Elmbridge, 
+
 Load ()
 ---------------------------------
 
