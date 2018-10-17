@@ -37,6 +37,10 @@ LSOA data for London - https://data.london.gov.uk/dataset/lsoa-atlas
 
 2011 Census data - https://www.ons.gov.uk/census/2011census/2011censusdata/bulkdata/bulkdatadownloads
 
+Pop data for London
+
+https://www.nomisweb.co.uk/query/construct/submit.asp?menuopt=201&subcomp=
+
 
 Transform ()
 --------------------------------
