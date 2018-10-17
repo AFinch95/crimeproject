@@ -41,6 +41,10 @@ Pop data for London
 
 https://www.nomisweb.co.uk/query/construct/submit.asp?menuopt=201&subcomp=
 
+Actual used pop data  - Mid-2001 to mid-2017 detailed time series
+ 
+https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland
+
 
 Transform ()
 --------------------------------
