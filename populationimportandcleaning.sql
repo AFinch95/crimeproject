@@ -1,41 +1,62 @@
 use crimeproject;
+-- Cleaning population data by changing data types, unpivotting and aggregating
+-- Choosing only population data for the boroughs in London
+if object_id('[raw].[LondonPops]') is not null
+drop table [raw].[LondonPops]
 
--- Cleaning population data by changing data types
--- Checking lengths of columns with string data and minimum, maximum values of population data
-SELECT 
-	 MIN(LEN([F1])) as minlengthBoroughCode
-	,MAX(LEN([F1])) as maxlengthBoroughCode
-	,MIN(LEN([F2])) as minlengthBoroughName
-	,MAX(LEN([F2]))	as maxlengthBoroughName
-	,MIN(LEN([F3])) as minlengthGeoType
-	,MAX(LEN([F3]))	as maxlengthGeoType
-	,MIN([F4])		as minTotalPop
-	,MAX([F4])		as maxTotalPop
-FROM [raw].[pop17]
-
-SELECT 
-	 CAST([F1] as char(9)) as [BoroughCode]
-	,CAST([F2] as varchar(22)) as [BoroughName]
-	,CAST([F3] as char(14)) as [GeoType]
-	,CAST([F4] as int) as [TotalPopulation]
-	,CAST('2017-01-01' as date) as [Year]
---INTO [clean].[population]  
-FROM [raw].[pop17]
-
--- Find only London LSOAs
-SELECT
- p.[Area Codes]
-,p.[F3]
-,p.[All Ages]
-,sum(p.[All Ages]) over (partition by p2.[F2])
---,CASE 
---	WHEN p.[Area Codes] is not null THEN '2016'
---	WHEN p2.[F2] is not null THEN '2017'
---END
-,p2.[F2]
-,p2.[F4]
-FROM [raw].[pop16] p
+SELECT DISTINCT
+	p.*
+INTO [raw].[LondonPops]
+FROM [raw].[populationfull] p
+-- Choosing only the Boroughs in London by inner joining with London borough names
 INNER JOIN [raw].[LondonLSOA] l
-ON P.[F3] = l.LSOAName
-LEFT JOIN [raw].[pop17] p2
-ON p2.[F2]=left(p.[F3],len(p.[F3])-5)
+ON p.[lad2014_name] = LEFT(l.[LSOAName], LEN(l.[LSOAName]) - 5)
+
+--Unpivot years of population data
+if object_id('[raw].[LondonPopUnpivot]') is not null
+drop table [raw].[LondonPopUnpivot]
+
+SELECT
+	 [Year]
+	,popcount
+	,[lad2014_code] as [BoroughCode]
+	,[lad2014_name] as [BoroughName]
+	,[sex]
+	,[Age]
+INTO [raw].[LondonPopUnpivot]
+FROM (SELECT * FROM [raw].[LondonPops]) lp
+unpivot(
+popcount for [Year] in ([population_2001], [population_2002], [population_2003], [population_2004], [population_2005], [population_2006], [population_2007], [population_2008], [population_2009], [population_2010], [population_2011], [population_2012], [population_2013], [population_2014], [population_2015], [population_2016], [population_2017])
+) unpiv
+
+-- Finding min and max values to aid choosing data types for each column
+SELECT
+	 min(len([BoroughCode])) as minlengthboroughcode
+	,max(len([BoroughCode])) as maxlengthboroughcode
+	,min(len(BoroughName)) as minlengthboroughname
+	,max(len(BoroughName)) as maxlengthboroughname
+	,min(cast([popcount] as int)) as minpopcount
+	,max(cast([popcount] as int)) as maxpopcount
+FROM [raw].[LondonPopUnpivot]
+
+--Find Populations for Under18s and Total for each Borough and Year
+SELECT DISTINCT
+	 cast([BoroughCode] as char(9)) as [BoroughCode]
+	,cast([BoroughName] as varchar(22)) as [BoroughName]
+	,cast(RIGHT([Year], 4) + '-01-01' as date) as [Year]
+	,CASE WHEN cast([Age] as smallint) < 18 THEN 'UNDER18' ELSE '18OROLDER' END as Under18
+	,sum(cast([popcount] as int)) over (partition by [BoroughCode], [Year]) as [TotalPop]
+	,sum(cast([popcount] as int)) over (partition by [BoroughCode], [Year], CASE WHEN cast([Age] as smallint) < 18 THEN 'UNDER18' ELSE '18OROLDER' END) as [PopUnder18]
+INTO [raw].[LondonPopUnpivotUnder18s]
+FROM [raw].[LondonPopUnpivot]
+
+--Put into clean population table
+SELECT 
+	 [BoroughCode]
+	,[BoroughName]
+	,[Year]
+	,[PopUnder18]
+	,[TotalPop]
+INTO [clean].[LondonPop]
+FROM [raw].[LondonPopUnpivotUnder18s]
+WHERE [Under18] = 'UNDER18'
