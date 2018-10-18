@@ -50,13 +50,68 @@ SELECT DISTINCT
 INTO [raw].[LondonPopUnpivotUnder18s]
 FROM [raw].[LondonPopUnpivot]
 
---Put into clean population table
+--Put into clean population table for years there is crime data for
+if object_id('[clean].[LondonPop]') is not null
+drop table [clean].[LondonPop]
+
 SELECT 
 	 [BoroughCode]
 	,[BoroughName]
-	,[Year]
+	,left([Year],4) as [Year]
 	,[PopUnder18]
 	,[TotalPop]
 INTO [clean].[LondonPop]
 FROM [raw].[LondonPopUnpivotUnder18s]
-WHERE [Under18] = 'UNDER18'
+WHERE [Under18] = 'UNDER18' AND [YEAR] between '2010-01-01' AND '2018-01-01' 
+
+-- Create Dimension for the model which includes population data
+CREATE TABLE [Geography].[DimBorough]
+(BoroughID int identity primary key
+,BoroughName varchar(50))
+
+-- Populate new table with Borough Names
+INSERT INTO [Geography].[DimBorough]
+	SELECT DISTINCT [Borough] FROM [Geography].[DimGeo]
+
+ALTER TABLE [Geography].[DimGeo]
+	ADD BoroughID int foreign key
+	references [Geography].[DimBorough] (BoroughID)
+
+----------------------------------------------------------------
+
+-- Not 100% sure what happened here -> joined dim geo to dim borough to pick up boroughID then recreate key constraints
+
+ALTER TABLE [Geography].[DimGeo]
+	SET BoroughID = SELECT 
+
+SELECT * FROM [Geography].[DimGeo]
+SELECT * FROM [Geography].[DimBorough]
+
+
+SELECT 
+ dg.*
+,db.[BoroughID]
+INTO [Geography].[DimGeo2]
+FROM [Geography].[DimBorough] db
+inner join [Geography].[DimGeo] dg on db.[BoroughName] = dg.[Borough]
+
+Alter schema trash
+	TRANSFER [Geography].[DimGeo]
+
+alter table [Geography].[DimGeo] drop column [Borough]
+
+select 264*4832/33
+
+alter table [Geography].[DimGeo]
+add constraint pk_GeoID primary key ([GeoID])
+
+alter table [Geography].[DimBorough]
+add constraint pk_BoroughID primary key ([BoroughID])
+
+alter table [Fact].[FactTable]
+add constraint fk_GeoID foreign key ([GeoID])
+references [Geography].[DimGeo] ([GeoID])
+
+alter table [Geography].[DimGeo]
+add constraint fk_BoroughID foreign key ([BoroughID])
+references [Geography].[DimBorough] ([BoroughID])
