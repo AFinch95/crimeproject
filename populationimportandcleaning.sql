@@ -115,3 +115,20 @@ references [Geography].[DimGeo] ([GeoID])
 alter table [Geography].[DimGeo]
 add constraint fk_BoroughID foreign key ([BoroughID])
 references [Geography].[DimBorough] ([BoroughID])
+
+-- Insert pop data into Kmball model
+
+SELECT
+	 db.[BoroughID]
+	,p.[BoroughCode]
+	,p.[Year]
+	,p.[PopUnder18]
+	,p.[TotalPop]
+INTO [Geography].[Population]
+FROM [clean].[LondonPop] p
+INNER JOIN [Geography].[DimBorough] db
+ON p.[BoroughName] = db.[BoroughName]
+
+alter table [Geography].[Population]
+add constraint fk_BoroughIDpop foreign key ([BoroughID])
+references [Geography].[DimBorough] ([BoroughID])
