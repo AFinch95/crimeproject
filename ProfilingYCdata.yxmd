@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2018.3">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="270" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" FileFormat="23">aka:YCLocations|||"crimeproject"."raw"."yclocationsraw"</File>
+          <FormatSpecificOptions>
+            <PreSQLOnConfig>True</PreSQLOnConfig>
+            <ReadCentroids>False</ReadCentroids>
+            <NoProgress>True</NoProgress>
+            <ReadUncommitted>False</ReadUncommitted>
+            <TableStyle>Quoted</TableStyle>
+            <PreSQL />
+            <PostSQL />
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>aka:YCLocations
+Table="crimeproject"."raw"."yclocationsraw"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="F8" size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Borough " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Funded 2017/18 " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Cut since 2011 " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Name" size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Address" size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Postcode " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="VCS run but supported by the council " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Notes" size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+            <Field name="Link " size="255" source="File: aka:YCLocations|||&quot;crimeproject&quot;.&quot;raw&quot;.&quot;yclocationsraw&quot;" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="354" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\Student\AppData\Local\Temp\Engine_14596_af0a34b5a1a641aba0306bf390a23208_\Engine_4904_efb02f604da8418f951b6fde35e3cc1d_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>ProfilingYCdata</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
