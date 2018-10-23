@@ -53,6 +53,8 @@ Cut down data from the whole of the UK to those reported crimes that have an LSO
 
 List of boroughs not included: Brentwood, Dartford, Elmbridge, 
 
+Ignored 2010 and 2018 because not full years for crimes
+
 Load ()
 ---------------------------------
 
