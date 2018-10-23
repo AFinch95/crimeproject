@@ -40,7 +40,7 @@ SELECT
 	THEN 1
 	ELSE 0
 	END as VolunteerYCSupportedByCouncilFlag
-FROM [raw].[yclocationsraw]
+FROM [trash].[yclocationsraw]
 )
 -- Cross join with table created from http://postcodes.io/ with Lat, Long data for YCs
 SELECT DISTINCT
@@ -48,6 +48,7 @@ SELECT DISTINCT
 	,yc.YCName
 	,yc.YCAddress
 	,yc.YCPostCode
+	,yc.cutsince2011flag
 	,ll.[Latitude] as [Latitude]
 	,ll.[Longitude] as [Longitude]
 	,ll.[Lsoa]
@@ -55,4 +56,4 @@ SELECT DISTINCT
 	,yc.VolunteerYCSupportedByCouncilFlag
 INTO [clean].[yclocations]
 FROM CTE as yc
-INNER JOIN [raw].[YCLatLong] ll ON yc.YCPostCode = ll.[Query]
+INNER JOIN [trash].[YCLatLong] ll ON yc.YCPostCode = ll.[Query]
